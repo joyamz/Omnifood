@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Omnifood/My-cart</title>
+
+    <link rel="stylesheet" href="css/general.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="index.html">
+
+    <script 
+    type="module" 
+    src="https://unpkg.com/ionicons@5.4.0/dist/ionicons/ionicons.esm.js">
+    </script>
+    <script 
+    nomodule =""
+    src="https://unpkg.com/ionicons@5.4.0/dist/ionicons/ionicons.js">
+    </script>
+
+</head>
+<body>
+    
+<section class="container cart-section ">
+
+    <div class="Left-side">
+      <div class="cart-order-details cart-item-1">
+        <div class="img-div">
+             <img 
+             src="img/gallery/gallery-3.jpg" 
+             alt="food image"
+             class="img-cart" />
+        </div>
+
+        <div class="cart-product-details">
+             <h2 class="product-name">Starter</h2>
+             <p class="subheading">1 meal per day</p>
+        </div>
+        <div> 
+          <ul class="pagination">
+            <li class="incdec">
+                <button class="page-link" onclick="decreaseNumber('textbox' , 'price')">
+                <ion-icon name="remove-outline"></ion-icon></button>
+            </li>
+
+            <li class="incdec li-2">
+                <input class="page-link" type="text" name=""  value="0" id="textbox"> </input>
+            </li>
+
+            <li class="incdec">
+                <button class="page-link" onclick="increaseNumber('textbox', 'price')"> 
+                <ion-icon name="add-outline"></ion-icon></button>
+            </li>
+           </ul>
+
+           <h2 class="product-price">$<span id="price">0.00</span></h2>
+        </div>
+        </div>
+
+    <hr>
+
+      <div class="cart-order-details cart-item-2">
+             <div  class="img-div">
+                <img 
+                src="img/gallery/gallery-7.jpg" 
+                alt="food image"
+                class="img-cart" />
+             </div>
+
+             <div class="cart-product-details">
+                <h2 class="product-name">Complete</h2>
+                <p class="subheading">2 meal per day</p>
+             </div>
+
+             <div> 
+              <ul class="pagination">
+                <li class="incdec">
+                <button class="page-link" id="dec" onclick="decreaseNumber('textbox1' , 'price1')">
+                <ion-icon name="remove-outline"> </ion-icon></button>
+                </li>
+
+                <li class="incdec li-2">
+                <input class="page-link" type="text" name=""  value="0" id="textbox1"> </input>
+                </li>
+
+                <li class="incdec">
+                  <button class="page-link" id="inc" onclick="increaseNumber1('textbox1' ,'price1' )"> 
+                  <ion-icon name="add-outline"></ion-icon></button>
+                </li>
+             </ul>
+
+            <h2 class="product-price">$ <span id="price1">0.00</span></h2>
+             </div>
+    
+      </div>
+
+    </div>
+
+<!-- Right side -->
+<div class="cart-price-details  total-price  ">
+
+
+    <div class="total-amt-box1">
+    <h2>Total Amount</h2>
+
+    <div class="cart-product-price  cart-amount-container"> 
+        <h4>Product amount</h4>
+        <p>$<span id="product_total_amt">0.00</span> </p>
+    </div>
+
+    <div class="cart-shipping-price  cart-amount-container"> 
+        <h4>Delivery Charges</h4>
+        <h4>Free</h4>
+    </div>
+        <hr>
+
+        <div class="total-amt-box2">
+            <h5 class="font" >Apply Coupon</h5>
+        
+            <input id="coupon_code" type="text" placeholder="enter code" name="discount code"  />
+            
+            <button class="checkout-btn btn btn--form" onclick="discount_code()">Apply</button>
+
+            <small id="error" ></small>
+        </div>
+
+        <hr>
+        
+    <div class="total-amt  cart-amount-container"> 
+    <h4>Total amount (including tax)</h4>
+    <p>$<span id="total_amt">0.00</span></p>
+    </div>
+        <button class="checkout-btn btn btn--form place_order_btn">Place Order</button>
+    </div>
+
+        <div class="total-amt-box3">
+            <h5 class="font">Expected delivery time</h5>
+            <p>In 30 minutes</p>
+        </div>
+
+  </div>
+</section>
+
+<script type="text/javascript" >
+
+var product_total_amt = document.getElementById('product_total_amt');
+var total_amt = document.getElementById('total_amt');
+
+var discountCode = document.getElementById("coupon_code");
+
+
+
+
+const decreaseNumber = (incdec , itemprice) => {
+    var decNum = document.getElementById(incdec);
+    var itemprice = document.getElementById(itemprice);
+    // console.log(decNum.value);
+
+    if (decNum.value <= 0 ) {
+        decNum.value = 0;
+    } else {
+        decNum.value = parseInt (decNum.value) -1;
+        itemprice.innerHTML =  0;
+
+        product_total_amt.innerHTML =  0 ;
+        total_amt.innerHTML = 0;
+    }
+}
+
+
+// Starter meal plan
+
+const increaseNumber = (incdec, itemprice) => {
+    var incNum = document.getElementById(incdec);
+    var itemprice = document.getElementById(itemprice);
+   
+
+    if (incNum.value == 1 ) {
+        incNum.value = 1;
+        
+    } else {
+        incNum.value = parseInt (incNum.value) +1;
+
+        itemprice.innerHTML =  parseInt (itemprice.innerHTML) + 399 ;
+        
+        product_total_amt.innerHTML = itemprice.innerHTML ;
+        total_amt.innerHTML  =   product_total_amt.innerHTML;
+    }
+}
+
+
+// Complete meal plan
+
+const increaseNumber1 = (incdec, itemprice) => {
+    var incNum = document.getElementById(incdec);
+    var itemprice1 = document.getElementById(itemprice);
+   
+
+    if (incNum.value == 1 ) {
+        incNum.value = 1;
+        
+    } else {
+        incNum.value = parseInt (incNum.value) +1;
+
+        itemprice1.innerHTML =  parseInt (itemprice1.innerHTML) + 649 ;
+        
+        product_total_amt.innerHTML = itemprice1.innerHTML ;
+        total_amt.innerHTML  =   product_total_amt.innerHTML;
+    }
+}
+
+     const discount_code = () => {
+        let final_amt = parseInt(total_amt.innerHTML ) ;
+        let error = document.getElementById('error');
+        if (discountCode.value === 'Meal') {
+            alert( "Yay! first meal free" );
+        } else {
+            alert("Choose correct code");
+        }
+     }
+
+     
+
+</script>
+</body>
+</html>
